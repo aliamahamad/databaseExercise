@@ -1,0 +1,300 @@
+corresponds to your MySQL server version for the right syntax to use near 'table
+ staff set position varchar(15)' at line 1
+mysql> desc table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MySQL server version for the right syntax to use near 'table
+' at line 1
+mysql> desc staff;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| staffNo  | varchar(5)  | NO   | PRI |         |       |
+| fname    | varchar(10) | YES  |     | NULL    |       |
+| lname    | varchar(10) | YES  |     | NULL    |       |
+| position | varchar(1)  | YES  |     | NULL    |       |
+| sex      | varchar(1)  | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| salary   | int(11)     | YES  |     | NULL    |       |
+| branchno | varchar(5)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+8 rows in set (0.03 sec)
+
+mysql> alter table staff modify position varchar(15);
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc staff;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| staffNo  | varchar(5)  | NO   | PRI |         |       |
+| fname    | varchar(10) | YES  |     | NULL    |       |
+| lname    | varchar(10) | YES  |     | NULL    |       |
+| position | varchar(15) | YES  |     | NULL    |       |
+| sex      | varchar(1)  | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| salary   | int(11)     | YES  |     | NULL    |       |
+| branchno | varchar(5)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into staff values
+    -> ('SL21','JOHN','WHITE','MANAGER','M','1945-10-01',30000,'B005');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into staff values
+    -> ('SL37','ANN','BEECH','ASSISTANT','F','1960-11-10',12000,'B003');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into staff values
+    -> ('SL14','DAVID','FORD','SUPERVISOR','M','1958-03-24',180000,'B003');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into staff values
+    -> ('SG9','MARY','HOWE','ASSISTANT','F','1970-02-19',240000,'B003');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM STAFF;
++---------+-------+-------+------------+------+------------+--------+----------+
+
+| staffNo | fname | lname | position   | sex  | dob        | salary | branchno |
+
++---------+-------+-------+------------+------+------------+--------+----------+
+
+| SG9     | MARY  | HOWE  | ASSISTANT  | F    | 1970-02-19 | 240000 | B003     |
+
+| SL14    | DAVID | FORD  | SUPERVISOR | M    | 1958-03-24 | 180000 | B003     |
+
+| SL21    | JOHN  | WHITE | MANAGER    | M    | 1945-10-01 |  30000 | B005     |
+
+| SL37    | ANN   | BEECH | ASSISTANT  | F    | 1960-11-10 |  12000 | B003     |
+
++---------+-------+-------+------------+------+------------+--------+----------+
+
+4 rows in set (0.00 sec)
+
+mysql> UPDATE TABLE STAFF SET STAFFNO = SG37 WHERE FNAME = DAVID;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MySQL server version for the right syntax to use near 'TABLE
+ STAFF SET STAFFNO = SG37 WHERE FNAME = DAVID' at line 1
+mysql> DROP TABLE STAFF;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE STAFF(
+    -> staffNo varchar(5),
+    -> fname varchar(10),
+    -> lname varchar(10),
+    -> position varchar(15),
+    -> sex varchar(1),
+    -> dob date,
+    -> salary int,
+    -> branchno varchar(5),
+    -> primary key(staffno));
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> DESC STAFF;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| staffNo  | varchar(5)  | NO   | PRI |         |       |
+| fname    | varchar(10) | YES  |     | NULL    |       |
+| lname    | varchar(10) | YES  |     | NULL    |       |
+| position | varchar(15) | YES  |     | NULL    |       |
+| sex      | varchar(1)  | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| salary   | int(11)     | YES  |     | NULL    |       |
+| branchno | varchar(5)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into staff values
+    -> ('SL21','JOHN','WHITE','MANAGER','M','1945-10-01',30000,'B005');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into staff values
+    -> ('SG37','ANN','BEECH','ASSISTANT','F','1960-11-10',12000,'B003');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into staff values
+    -> ('SG14','DAVID','FORD','SUPERVISOR','M','1958-03-24',180000,'B003');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into staff values
+    -> ('SA9','MARY','HOWE','ASSISTANT','F','1970-02-19',240000,'B003');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SELECT * FROM STAFF;
++---------+-------+-------+------------+------+------------+--------+----------+
+
+| staffNo | fname | lname | position   | sex  | dob        | salary | branchno |
+
++---------+-------+-------+------------+------+------------+--------+----------+
+
+| SA9     | MARY  | HOWE  | ASSISTANT  | F    | 1970-02-19 | 240000 | B003     |
+
+| SG14    | DAVID | FORD  | SUPERVISOR | M    | 1958-03-24 | 180000 | B003     |
+
+| SG37    | ANN   | BEECH | ASSISTANT  | F    | 1960-11-10 |  12000 | B003     |
+
+| SL21    | JOHN  | WHITE | MANAGER    | M    | 1945-10-01 |  30000 | B005     |
+
++---------+-------+-------+------------+------+------------+--------+----------+
+
+4 rows in set (0.00 sec)
+
+mysql> insert into staff values
+    -> ('SM9','JOHN','BLACK','ASSISTANT','M','1983-06-25',10000,'B003');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into staff values
+    -> ('SM44','JOHN','BLACK','ASSISTANT','M','1983-06-25',10000,'B003');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into staff values
+    -> ('SM21','JOHN','BLACK','ASSISTANT','M','1983-06-25',10000,'B003');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into staff values
+    -> ('SM44','MARILYN','LAN','ASSISTANT','M','1962-12-16',12000,'B005');
+ERROR 1062 (23000): Duplicate entry 'SM44' for key 'PRIMARY'
+mysql> DELETE FROM STAFF WHERE STAFFNO = 'SM44';
+Query OK, 1 row affected (0.06 sec)
+
+mysql> DELETE FROM STAFF WHERE STAFFNO = 'SM9';
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM STAFF;
++---------+-------+-------+------------+------+------------+--------+----------+
+
+| staffNo | fname | lname | position   | sex  | dob        | salary | branchno |
+
++---------+-------+-------+------------+------+------------+--------+----------+
+
+| SA9     | MARY  | HOWE  | ASSISTANT  | F    | 1970-02-19 | 240000 | B003     |
+
+| SG14    | DAVID | FORD  | SUPERVISOR | M    | 1958-03-24 | 180000 | B003     |
+
+| SG37    | ANN   | BEECH | ASSISTANT  | F    | 1960-11-10 |  12000 | B003     |
+
+| SL21    | JOHN  | WHITE | MANAGER    | M    | 1945-10-01 |  30000 | B005     |
+
+| SM21    | JOHN  | BLACK | ASSISTANT  | M    | 1983-06-25 |  10000 | B003     |
+
++---------+-------+-------+------------+------+------------+--------+----------+
+
+5 rows in set (0.00 sec)
+
+mysql> insert into staff values
+    -> ('SM44','MARILYN','LAN','ASSISTANT','M','1962-12-16',12000,'B005');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into staff values
+    -> ('SG18','DAVID','BLAINE','ASSISTANT','M','1952-03-01',10000,'B005');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM STAFF;
++---------+---------+--------+------------+------+------------+--------+----------+
+| staffNo | fname   | lname  | position   | sex  | dob        | salary | branchno |
++---------+---------+--------+------------+------+------------+--------+----------+
+| SA9     | MARY    | HOWE   | ASSISTANT  | F    | 1970-02-19 | 240000 | B003     |
+| SG14    | DAVID   | FORD   | SUPERVISOR | M    | 1958-03-24 | 180000 | B003     |
+| SG18    | DAVID   | BLAINE | ASSISTANT  | M    | 1952-03-01 |  10000 | B005     |
+| SG37    | ANN     | BEECH  | ASSISTANT  | F    | 1960-11-10 |  12000 | B003     |
+| SL21    | JOHN    | WHITE  | MANAGER    | M    | 1945-10-01 |  30000 | B005     |
+| SM21    | JOHN    | BLACK  | ASSISTANT  | M    | 1983-06-25 |  10000 | B003     |
+| SM44    | MARILYN | LAN    | ASSISTANT  | M    | 1962-12-16 |  12000 | B005     |
++---------+---------+--------+------------+------+------------+--------+----------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT STAFFNO, FNAME, LNAME, POSITION, SALARY
+    -> FROM STAFF
+    -> WHERE SALARY > SOME (SELECT SALARY
+    -> FROM STAFF
+    -> WHERE BRANCHNO = 'B003';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+mysql> SELECT STAFFNO, FNAME, LNAME, POSITION, SALARY
+    -> FROM STAFF
+    -> WHERE SALARY > SOME (SELECT SALARY
+    -> FROM STAFF
+    -> WHERE BRANCHNO = 'B003');
++---------+---------+-------+------------+--------+
+| STAFFNO | FNAME   | LNAME | POSITION   | SALARY |
++---------+---------+-------+------------+--------+
+| SA9     | MARY    | HOWE  | ASSISTANT  | 240000 |
+| SG14    | DAVID   | FORD  | SUPERVISOR | 180000 |
+| SG37    | ANN     | BEECH | ASSISTANT  |  12000 |
+| SL21    | JOHN    | WHITE | MANAGER    |  30000 |
+| SM44    | MARILYN | LAN   | ASSISTANT  |  12000 |
++---------+---------+-------+------------+--------+
+5 rows in set (0.05 sec)
+
+mysql> SELECT STAFFNO, FNAME, LNAME, POSITION, SALARY
+    -> FROM STAFF
+    -> WHERE SALARY > ALL (SELECT SALARY
+    -> FROM STAFF
+    -> WHERE BRANCHNO = 'B005');
++---------+-------+-------+------------+--------+
+| STAFFNO | FNAME | LNAME | POSITION   | SALARY |
++---------+-------+-------+------------+--------+
+| SA9     | MARY  | HOWE  | ASSISTANT  | 240000 |
+| SG14    | DAVID | FORD  | SUPERVISOR | 180000 |
++---------+-------+-------+------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> UPDATE STAFF
+    -> SET SALARY = SALARY * 0.1;
+Query OK, 7 rows affected (0.03 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+
+mysql> UPDATE STAFF
+    -> SET SALARY = SALARY / 0.1;
+Query OK, 7 rows affected (0.08 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+
+mysql> SELECT * FROM STAFF;
++---------+---------+--------+------------+------+------------+--------+----------+
+| staffNo | fname   | lname  | position   | sex  | dob        | salary | branchno |
++---------+---------+--------+------------+------+------------+--------+----------+
+| SA9     | MARY    | HOWE   | ASSISTANT  | F    | 1970-02-19 | 240000 | B003     |
+| SG14    | DAVID   | FORD   | SUPERVISOR | M    | 1958-03-24 | 180000 | B003     |
+| SG18    | DAVID   | BLAINE | ASSISTANT  | M    | 1952-03-01 |  10000 | B005     |
+| SG37    | ANN     | BEECH  | ASSISTANT  | F    | 1960-11-10 |  12000 | B003     |
+| SL21    | JOHN    | WHITE  | MANAGER    | M    | 1945-10-01 |  30000 | B005     |
+| SM21    | JOHN    | BLACK  | ASSISTANT  | M    | 1983-06-25 |  10000 | B003     |
+| SM44    | MARILYN | LAN    | ASSISTANT  | M    | 1962-12-16 |  12000 | B005     |
++---------+---------+--------+------------+------+------------+--------+----------+
+7 rows in set (0.00 sec)
+
+mysql> UPDATE STAFF
+    -> SET SALARY = SALARY * 1.10;
+Query OK, 7 rows affected (0.03 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+
+mysql> UPDATE STAFF
+    -> SET SALARY = SALARY * 1.5
+    -> ;
+Query OK, 7 rows affected (0.03 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+
+mysql> UPDATE STAFF
+    -> SET SALARY = SALARY / 1.5;
+Query OK, 7 rows affected (0.03 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+
+mysql> UPDATE STAFF
+    -> SET SALARY = SALARY * 1.05
+    -> WHERE POSITION = 'MANAGER';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE STAFF
+    -> SET POSITION = 'SUPERVISOR', SALARY = 15000
+    -> WHERE BRANCHNO = B005;
+ERROR 1054 (42S22): Unknown column 'B005' in 'where clause'
+mysql> UPDATE STAFF
+    -> SET POSITION = 'SUPERVISOR', SALARY = 15000
+    -> WHERE BRANCHNO = 'B005';
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql>

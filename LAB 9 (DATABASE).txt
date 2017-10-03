@@ -1,0 +1,203 @@
+mysql: [Warning] C:\Program Files (x86)\MySQL\MySQL Server 5.7\bin\mysql.exe: ignoring option '--no-beep' due to invalid value ''
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 25
+Server version: 5.7.14-log MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database family;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> use family;
+Database changed
+mysql> create table parent(
+    -> id varchar(5),
+    -> dad_name varchar(20),
+    -> mom_name varchar(20),
+    -> address varchar(30),
+    -> phone int,
+    -> primary key(id));
+Query OK, 0 rows affected (0.42 sec)
+
+mysql> create table child(
+    -> c_id varchar(5),
+    -> name varchar(20),
+    -> age int,
+    -> school varchar(40),
+    -> fee double,
+    -> p_id varchar(5),
+    -> primary key(c_id),
+    -> foreign key(p_id) references parent(id));
+Query OK, 0 rows affected (0.35 sec)
+
+mysql> insert into parent values
+    -> ('p12','abdullah','aminah','272, mulia street, perak',054544);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into parent values
+    -> ('m12','hashim','ulya','45, petaling, kl',034563);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into parent values
+    -> ('z12','abu bakr','naifa,'8, sejahtera street, jb',075584);
+    '> ('z12','abu bakr','naifa,'8', sejahtera street, jb',075584);
+    '> '>
+    -> ('z12','abu bakr','naifa,'8', sejahtera street, jb',075584);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '8, sejahtera street, jb',075584);
+('z12','abu bakr','naifa,'8', sejahtera street' at line 2
+mysql> insert into parent values
+    -> ('z12','abu bakr','naifa',8, sejahtera street, jb',075584);
+    '> '>
+    -> insert into parent values
+    -> ('z12','abu bakr','naifa','8, sejahtera street, jb',075584);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'street, jb',075584);
+'>
+insert into parent values
+('z12','abu bakr','naifa','8, ' at line 2
+mysql> insert into parent values
+    -> ('z12','abu bakr','naifa','8, sejahtera street, jb',075584);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into parent values
+    -> ('y12','umar','saadah','98, desa street, perak',054525);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into child values
+    -> ('p121','ahmad nawfal',5,'iman kindergarden',153.21,'p12');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into child values
+    -> ('m122','siti khadeeja',7,'islamic school',121.50,'m12');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into child values
+    -> ('m123','siti aesha',8,'islamic school',121.50,'m12');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into child values
+    -> ('z123','ahmad faishal',5,'as-siddiq kindergarden',171.20,'z12');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into child values
+    -> ('y123','ahahhana',10,'khalifa school',212.00,'y12');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from parent;
++-----+----------+----------+--------------------------+-------+
+| id  | dad_name | mom_name | address                  | phone |
++-----+----------+----------+--------------------------+-------+
+| m12 | hashim   | ulya     | 45, petaling, kl         | 34563 |
+| p12 | abdullah | aminah   | 272, mulia street, perak | 54544 |
+| y12 | umar     | saadah   | 98, desa street, perak   | 54525 |
+| z12 | abu bakr | naifa    | 8, sejahtera street, jb  | 75584 |
++-----+----------+----------+--------------------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from child;
++------+---------------+------+------------------------+--------+------+
+| c_id | name          | age  | school                 | fee    | p_id |
++------+---------------+------+------------------------+--------+------+
+| m122 | siti khadeeja |    7 | islamic school         |  121.5 | m12  |
+| m123 | siti aesha    |    8 | islamic school         |  121.5 | m12  |
+| p121 | ahmad nawfal  |    5 | iman kindergarden      | 153.21 | p12  |
+| y123 | ahahhana      |   10 | khalifa school         |    212 | y12  |
+| z123 | ahmad faishal |    5 | as-siddiq kindergarden |  171.2 | z12  |
++------+---------------+------+------------------------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> select p.dad_name, p.mom_name, c.name
+    -> from parent p, child c
+    -> where p.id = c.p_id;
++----------+----------+---------------+
+| dad_name | mom_name | name          |
++----------+----------+---------------+
+| hashim   | ulya     | siti khadeeja |
+| hashim   | ulya     | siti aesha    |
+| abdullah | aminah   | ahmad nawfal  |
+| umar     | saadah   | ahahhana      |
+| abu bakr | naifa    | ahmad faishal |
++----------+----------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> update child set name = 'shahhana' where c_id = 'y123';
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT p.phone,c.name FROM parent p, child c WHERE p.id=c.p_id;
++-------+---------------+
+| phone | name          |
++-------+---------------+
+| 34563 | siti khadeeja |
+| 34563 | siti aesha    |
+| 54544 | ahmad nawfal  |
+| 54525 | shahhana      |
+| 75584 | ahmad faishal |
++-------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT p.name;
+ERROR 1109 (42S02): Unknown table 'p' in field list
+mysql> select p.dad_name, p.mom_name
+    -> from parent;
+ERROR 1054 (42S22): Unknown column 'p.dad_name' in 'field list'
+mysql> select p.dad_name, p.mom_name
+    -> from parent;
+ERROR 1054 (42S22): Unknown column 'p.dad_name' in 'field list'
+mysql> select p.dad_name, p.mom_name
+    -> from parent
+    -> where p.id = c.p_id;
+ERROR 1054 (42S22): Unknown column 'p.dad_name' in 'field list'
+mysql> select p.dad_name, p.mom_name
+    -> from parentp, child c
+    -> where p.id = c.p_id;
+ERROR 1146 (42S02): Table 'family.parentp' doesn't exist
+mysql> select p.dad_name, p.mom_name
+    -> from parent p, child c
+    -> where p.id = c.p_id;
++----------+----------+
+| dad_name | mom_name |
++----------+----------+
+| hashim   | ulya     |
+| hashim   | ulya     |
+| abdullah | aminah   |
+| umar     | saadah   |
+| abu bakr | naifa    |
++----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select c.* ,p.address
+    -> from child c, parent p
+    -> where p.id = c.p_id;
++------+---------------+------+------------------------+--------+------+--------------------------+
+| c_id | name          | age  | school                 | fee    | p_id | address                  |
++------+---------------+------+------------------------+--------+------+--------------------------+
+| m122 | siti khadeeja |    7 | islamic school         |  121.5 | m12  | 45, petaling, kl         |
+| m123 | siti aesha    |    8 | islamic school         |  121.5 | m12  | 45, petaling, kl         |
+| p121 | ahmad nawfal  |    5 | iman kindergarden      | 153.21 | p12  | 272, mulia street, perak |
+| y123 | shahhana      |   10 | khalifa school         |    212 | y12  | 98, desa street, perak   |
+| z123 | ahmad faishal |    5 | as-siddiq kindergarden |  171.2 | z12  | 8, sejahtera street, jb  |
++------+---------------+------+------------------------+--------+------+--------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select c.* ,p.dad_name, p.mom_name
+    -> from parent p, child c
+    -> where p.id = c.p_id;
++------+---------------+------+------------------------+--------+------+----------+----------+
+| c_id | name          | age  | school                 | fee    | p_id | dad_name | mom_name |
++------+---------------+------+------------------------+--------+------+----------+----------+
+| m122 | siti khadeeja |    7 | islamic school         |  121.5 | m12  | hashim   | ulya     |
+| m123 | siti aesha    |    8 | islamic school         |  121.5 | m12  | hashim   | ulya     |
+| p121 | ahmad nawfal  |    5 | iman kindergarden      | 153.21 | p12  | abdullah | aminah   |
+| y123 | shahhana      |   10 | khalifa school         |    212 | y12  | umar     | saadah   |
+| z123 | ahmad faishal |    5 | as-siddiq kindergarden |  171.2 | z12  | abu bakr | naifa    |
++------+---------------+------+------------------------+--------+------+----------+----------+
+5 rows in set (0.00 sec)
+
+mysql>

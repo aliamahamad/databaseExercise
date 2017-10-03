@@ -1,0 +1,208 @@
++-----------+-------------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+mysql> INSERT INTO DEPARTMENT VALUES(
+    -> 'RESEARCH', 5, 333445555, '1988-05-22');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO DEPARTMENT VALUES
+    -> ('ADMINISTRATION', 4, 987654321, '1995-01-01');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT INTO DEPARTMENT VALUES
+    -> ('HEADQUARTERS', 1, 888665555, '1981-06-19');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT INTO DEPT_LOCATIONS VALUES
+    -> (1, 'HOUSTON');
+Query OK, 1 row affected (0.38 sec)
+
+mysql> INSERT INTO DEPT_LOCATIONS VALUES
+    -> (4, 'STAFFORD');
+Query OK, 1 row affected (0.51 sec)
+
+mysql> INSERT INTO DEPT_LOCATIONS VALUES
+    -> (5, 'BELLAIRE');
+Query OK, 1 row affected (0.54 sec)
+
+mysql> INSERT INTO DEPT_LOCATIONS VALUES
+    -> (5, 'SUGARLAND');
+Query OK, 1 row affected (0.54 sec)
+
+mysql> INSERT INTO DEPT_LOCATIONS VALUES
+    -> (5, 'HOUSTON');
+Query OK, 1 row affected (0.65 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    -> ('JOHN', 'B', 'SMITH', 123456789, '1965-01-09', '731 FONDREN, HOUSTON, TX', 'M', 30000, 333445555, 5);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    -> ('FRANKLIN', 'T', 'WONG', 333445555, '1955-12-08', '638 VOSS, HOUSTON, TX', 'M', 40000, 888665555, 5);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    -> ('ALICIA', 'J', 'ZELAYA', 999887777, '1968-01-19', '3321 CASTLE, SPRING, TX', 'F', 25000, 987654321, 4);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    -> ('JENNIFER', 'S', 'WALLACE', 987654321, '1942-06-20', '291 BERRY, BELLAIRE, TX', 'F', 43000, 888665555, 4);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    -> ('RAMESH', 'K', 'NARAYAN', 666884444, '1962-09-15', '975 FIRE OAK, HUMBLE, TX', 'M', 38000, 333445555, 5);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    -> ('JOYCE', 'A', 'ENGLISH', 453453453, '1972-07-31', '5631 RICE, HOUSTON, TX', 'F', 25000, 333445555, 5);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    -> ('AHMAD', 'V', 'JABBAR', 987987987, '1969-03-29', '980 DALLAS, HOUSTON, TX', 'M', 25000, 987654321, 4);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    -> ('JAMES', 'E', 'BORG', 888665555, '1937-11-10', '450 STONE, HOUSTON, TX', 'M', 55000, 0, 1);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> SELECT * FROM DEPARTMENT;
++----------------+---------+-----------+----------------+
+| DNAME          | DNUMBER | MGR_SSN   | MGR_START_DATE |
++----------------+---------+-----------+----------------+
+| HEADQUARTERS   |       1 | 888665555 | 1981-06-19     |
+| ADMINISTRATION |       4 | 987654321 | 1995-01-01     |
+| RESEARCH       |       5 | 333445555 | 1988-05-22     |
++----------------+---------+-----------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPT_LOCATIONS;
++---------+-----------+
+| DNUMBER | DLOCATION |
++---------+-----------+
+|       1 | HOUSTON   |
+|       4 | STAFFORD  |
+|       5 | BELLAIRE  |
+|       5 | SUGARLAND |
+|       5 | HOUSTON   |
++---------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM EMPLOYEE;
++----------+-------+---------+-----------+------------+--------------------------+------+--------+-----------+------+
+| FNAME    | MINIT | LNAME   | SSN       | BDATE      | ADDRESS                  | SEX  | SALARY | SUPER_SSN | DNO  |
++----------+-------+---------+-----------+------------+--------------------------+------+--------+-----------+------+
+| JOHN     | B     | SMITH   | 123456789 | 1965-01-09 | 731 FONDREN, HOUSTON, TX | M    |  30000 | 333445555 |    5 |
+| FRANKLIN | T     | WONG    | 333445555 | 1955-12-08 | 638 VOSS, HOUSTON, TX    | M    |  40000 | 888665555 |    5 |
+| JOYCE    | A     | ENGLISH | 453453453 | 1972-07-31 | 5631 RICE, HOUSTON, TX   | F    |  25000 | 333445555 |    5 |
+| RAMESH   | K     | NARAYAN | 666884444 | 1962-09-15 | 975 FIRE OAK, HUMBLE, TX | M    |  38000 | 333445555 |    5 |
+| JAMES    | E     | BORG    | 888665555 | 1937-11-10 | 450 STONE, HOUSTON, TX   | M    |  55000 |         0 |    1 |
+| JENNIFER | S     | WALLACE | 987654321 | 1942-06-20 | 291 BERRY, BELLAIRE, TX  | F    |  43000 | 888665555 |    4 |
+| AHMAD    | V     | JABBAR  | 987987987 | 1969-03-29 | 980 DALLAS, HOUSTON, TX  | M    |  25000 | 987654321 |    4 |
+| ALICIA   | J     | ZELAYA  | 999887777 | 1968-01-19 | 3321 CASTLE, SPRING, TX  | F    |  25000 | 987654321 |    4 |
++----------+-------+---------+-----------+------------+--------------------------+------+--------+-----------+------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT C.FNAME, C.LNAME, A.DNAME
+    -> FROM EMPLOYEE C, DEPARTMENT A
+    -> WHERE C.DNO = A.DNUMBER;
++----------+---------+----------------+
+| FNAME    | LNAME   | DNAME          |
++----------+---------+----------------+
+| JAMES    | BORG    | HEADQUARTERS   |
+| JENNIFER | WALLACE | ADMINISTRATION |
+| AHMAD    | JABBAR  | ADMINISTRATION |
+| ALICIA   | ZELAYA  | ADMINISTRATION |
+| JOHN     | SMITH   | RESEARCH       |
+| FRANKLIN | WONG    | RESEARCH       |
+| JOYCE    | ENGLISH | RESEARCH       |
+| RAMESH   | NARAYAN | RESEARCH       |
++----------+---------+----------------+
+8 rows in set (0.04 sec)
+
+mysql> SELECT C.FNAME, A.DNAME
+    -> FROM EMPLOYEE C, DEPARTMENT A
+    -> WHERE C.DNO = A.DNUMBER;
++----------+----------------+
+| FNAME    | DNAME          |
++----------+----------------+
+| JAMES    | HEADQUARTERS   |
+| JENNIFER | ADMINISTRATION |
+| AHMAD    | ADMINISTRATION |
+| ALICIA   | ADMINISTRATION |
+| JOHN     | RESEARCH       |
+| FRANKLIN | RESEARCH       |
+| JOYCE    | RESEARCH       |
+| RAMESH   | RESEARCH       |
++----------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT A.DNAME, B.DLOCATION
+    -> FROM DEPARTMENT A, DEPT_LOCATIONS B
+    -> WHERE A.DNUMBER = B.DNUMBER;
++----------------+-----------+
+| DNAME          | DLOCATION |
++----------------+-----------+
+| HEADQUARTERS   | HOUSTON   |
+| ADMINISTRATION | STAFFORD  |
+| RESEARCH       | BELLAIRE  |
+| RESEARCH       | SUGARLAND |
+| RESEARCH       | HOUSTON   |
++----------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT C.FNAME, A.DNAME, B.DLOCATION
+    -> FROM EMPLOYEE C, DEPARTMENT A, DEPT_LOCATIONS B
+    -> WHERE C.DNO = A.DNUMBER AND A.DNUMBER = B.DLOCATION;
+Empty set, 15 warnings (0.02 sec)
+
+mysql> SELECT C.FNAME, A.DNAME, B.DLOCATION
+    -> FROM EMPLOYEE C, DEPARTMENT A, DEPT_LOCATIONS B
+    -> WHERE C.DNO = A.DNUMBER AND A.DNUMBER = B.DNUMBER;
++----------+----------------+-----------+
+| FNAME    | DNAME          | DLOCATION |
++----------+----------------+-----------+
+| JAMES    | HEADQUARTERS   | HOUSTON   |
+| JENNIFER | ADMINISTRATION | STAFFORD  |
+| AHMAD    | ADMINISTRATION | STAFFORD  |
+| ALICIA   | ADMINISTRATION | STAFFORD  |
+| JOHN     | RESEARCH       | BELLAIRE  |
+| FRANKLIN | RESEARCH       | BELLAIRE  |
+| JOYCE    | RESEARCH       | BELLAIRE  |
+| RAMESH   | RESEARCH       | BELLAIRE  |
+| JOHN     | RESEARCH       | SUGARLAND |
+| FRANKLIN | RESEARCH       | SUGARLAND |
+| JOYCE    | RESEARCH       | SUGARLAND |
+| RAMESH   | RESEARCH       | SUGARLAND |
+| JOHN     | RESEARCH       | HOUSTON   |
+| FRANKLIN | RESEARCH       | HOUSTON   |
+| JOYCE    | RESEARCH       | HOUSTON   |
+| RAMESH   | RESEARCH       | HOUSTON   |
++----------+----------------+-----------+
+16 rows in set (0.00 sec)
+
+mysql> SELECT C.FNAME, C.LNAME, C.ADDRESS, B.*, A.*
+    -> FROM EMPLOYEE C, DEPT_LOCATIONS B, DEPARTMENT A
+    -> WHERE C.DNO = A.DNUMBER AND A.DNUMBER = B.DNUMBER;
++----------+---------+--------------------------+---------+-----------+----------------+---------+-----------+----------------+
+| FNAME    | LNAME   | ADDRESS                  | DNUMBER | DLOCATION | DNAME          | DNUMBER | MGR_SSN   | MGR_START_DATE |
++----------+---------+--------------------------+---------+-----------+----------------+---------+-----------+----------------+
+| JAMES    | BORG    | 450 STONE, HOUSTON, TX   |       1 | HOUSTON   | HEADQUARTERS   |       1 | 888665555 | 1981-06-19     |
+| JENNIFER | WALLACE | 291 BERRY, BELLAIRE, TX  |       4 | STAFFORD  | ADMINISTRATION |       4 | 987654321 | 1995-01-01     |
+| AHMAD    | JABBAR  | 980 DALLAS, HOUSTON, TX  |       4 | STAFFORD  | ADMINISTRATION |       4 | 987654321 | 1995-01-01     |
+| ALICIA   | ZELAYA  | 3321 CASTLE, SPRING, TX  |       4 | STAFFORD  | ADMINISTRATION |       4 | 987654321 | 1995-01-01     |
+| JOHN     | SMITH   | 731 FONDREN, HOUSTON, TX |       5 | BELLAIRE  | RESEARCH       |       5 | 333445555 | 1988-05-22     |
+| FRANKLIN | WONG    | 638 VOSS, HOUSTON, TX    |       5 | BELLAIRE  | RESEARCH       |       5 | 333445555 | 1988-05-22     |
+| JOYCE    | ENGLISH | 5631 RICE, HOUSTON, TX   |       5 | BELLAIRE  | RESEARCH       |       5 | 333445555 | 1988-05-22     |
+| RAMESH   | NARAYAN | 975 FIRE OAK, HUMBLE, TX |       5 | BELLAIRE  | RESEARCH       |       5 | 333445555 | 1988-05-22     |
+| JOHN     | SMITH   | 731 FONDREN, HOUSTON, TX |       5 | SUGARLAND | RESEARCH       |       5 | 333445555 | 1988-05-22     |
+| FRANKLIN | WONG    | 638 VOSS, HOUSTON, TX    |       5 | SUGARLAND | RESEARCH       |       5 | 333445555 | 1988-05-22     |
+| JOYCE    | ENGLISH | 5631 RICE, HOUSTON, TX   |       5 | SUGARLAND | RESEARCH       |       5 | 333445555 | 1988-05-22     |
+| RAMESH   | NARAYAN | 975 FIRE OAK, HUMBLE, TX |       5 | SUGARLAND | RESEARCH       |       5 | 333445555 | 1988-05-22     |
+| JOHN     | SMITH   | 731 FONDREN, HOUSTON, TX |       5 | HOUSTON   | RESEARCH       |       5 | 333445555 | 1988-05-22     |
+| FRANKLIN | WONG    | 638 VOSS, HOUSTON, TX    |       5 | HOUSTON   | RESEARCH       |       5 | 333445555 | 1988-05-22     |
+| JOYCE    | ENGLISH | 5631 RICE, HOUSTON, TX   |       5 | HOUSTON   | RESEARCH       |       5 | 333445555 | 1988-05-22     |
+| RAMESH   | NARAYAN | 975 FIRE OAK, HUMBLE, TX |       5 | HOUSTON   | RESEARCH       |       5 | 333445555 | 1988-05-22     |
++----------+---------+--------------------------+---------+-----------+----------------+---------+-----------+----------------+
+16 rows in set (0.00 sec)
+
+mysql>
